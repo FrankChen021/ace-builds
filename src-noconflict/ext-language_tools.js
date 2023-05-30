@@ -2027,25 +2027,8 @@ var FilteredList = /** @class */ (function () {
             }
             else {
                 var fullMatchIndex = caption.toLowerCase().indexOf(lower);
-                if (fullMatchIndex > -1) {
-                    penalty = fullMatchIndex;
-                }
-                else {
-                    for (var j = 0; j < needle.length; j++) {
-                        var i1 = caption.indexOf(lower[j], lastIndex + 1);
-                        var i2 = caption.indexOf(upper[j], lastIndex + 1);
-                        index = (i1 >= 0) ? ((i2 < 0 || i1 < i2) ? i1 : i2) : i2;
-                        if (index < 0)
-                            continue loop;
-                        distance = index - lastIndex - 1;
-                        if (distance > 0) {
-                            if (lastIndex === -1)
-                                penalty += 10;
-                            penalty += distance;
-                            matchMask = matchMask | (1 << j);
-                        }
-                        lastIndex = index;
-                    }
+                if (fullMatchIndex === -1) {
+                    continue;
                 }
             }
             item.matchMask = matchMask;
